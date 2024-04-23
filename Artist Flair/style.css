@@ -1,5 +1,6 @@
 :root {
   --clr-accent-300: hsl(47, 31%, 43%);
+  --clr-accent-400: hsl(223,35%,34%);
 
   --clr-primary-200: hsl(46, 60%, 73%);
   --clr-primary-300: hsl(47, 33%, 54%);
@@ -271,7 +272,8 @@ a:is(:link, :active, :visited).active {
 /* footer */
 
 .primary-footer {
-  --logo-color: var(--clr-accent-300);
+  --logo-color: var(--clr-neutral-100);
+  --logo-color-brush: var(--clr-neutral-100);
 }
 
 .primary-footer-wrapper {
@@ -374,12 +376,12 @@ input:where([type="text"], [type="suggestion"]) {
   position: relative;
 }
 
-a,
+/* a,
 a:link,
 a:visited {
-  color: #212121;
+  color: var(--clr-neutral-100);
   text-decoration: none;
-}
+} */
 
 .carousel-slider {
   height: 560px;
@@ -526,6 +528,18 @@ a:visited {
   border-radius: 15px;
 }
 
+@media(max-width: 50em){
+  .exhibit-container{
+    width: calc(100% - 40px);
+    columns: 3;
+  }
+}
+
+@media(max-width: 40em) {
+  .exhibit-container {
+    columns: 2;
+  }
+}
 /* utility classes */
 
 .visually-hidden {
@@ -623,6 +637,10 @@ a:visited {
 
 .bg-accent-300 {
   background-color: var(--clr-accent-300);
+}
+
+.bg-accent-400{
+  background-color: var(--clr-accent-400);
 }
 
 .bg-neutral-100 {
