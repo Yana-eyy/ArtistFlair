@@ -6,7 +6,7 @@
   --clr-primary-300: hsl(47, 33%, 54%);
 
   --clr-neutral-100: hsl(47, 30%, 85%);
-  --clr-neutral-500: hsl(39, 52%, 11%);
+  --clr-neutral-500: hsla(37, 30%, 22%, 1);
   --clr-neutral-700: hsl(224, 85%, 5%);
 
   --ff-primary: "Roboto", sans-serif;
@@ -154,12 +154,20 @@ body {
 /* navigation */
 
 .primary-header {
-  padding-top: var(--size-700);
+  padding-top: var(--size-300);
+  /* position: sticky;
+    top: 0;
+    z-index: 1000; */
 }
 
 .logo-img {
   width: 90px;
   height: auto;
+}
+
+.logo-img-space{
+  --logo-color: var(--clr-neutral-500);
+  --logo-color-brush: var(--clr-neutral-500)
 }
 
 .logo-h2 {
@@ -191,8 +199,7 @@ body {
   font-weight: var(--fw-semi-bold);
 }
 
-.nav-list a,
-.logo-container a {
+.nav-list a{
   text-decoration: none;
   color: var(--clr-neutral-500);
   padding: 0.5rem 1.5rem;
@@ -222,6 +229,11 @@ a:is(:link, :active, :visited).active {
     /* box-shadow: 0 0 0.75em rgb(0, 0, 0, 0.05); */
   }
 
+  .primary-header[data-overlay]{
+    position: relative;
+    z-index: 999;
+  }
+
   .primary-header[data-overlay]:before {
     content: "";
     position: fixed;
@@ -229,8 +241,9 @@ a:is(:link, :active, :visited).active {
     background-image: linear-gradient(rgb(0 0 0 /0), rgb(0 0 0 / 0.8));
   }
   .logo-img {
-    width: 100px;
+    width: 90px;
     height: auto;
+    justify-content: center;
   }
 
   .nav-list {
@@ -261,11 +274,17 @@ a:is(:link, :active, :visited).active {
     background: transparent;
     border: 0;
     padding: 0.5em;
+    width: 1.65rem;
+    aspect-ratio: 1;
+
+    background-image: url(img/icon-hambergur.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
-  .mobile-nav-toggle .icon-close,
-  .logo-h2 {
-    display: none;
+  .mobile-nav-toggle[aria-expanded= "true"]{
+    background-image: url("img/icon-close.svg");
   }
 }
 
@@ -408,7 +427,7 @@ a:visited {
 }
 
 .slider-item {
-  box-shadow: 0 1px 3px rgba(216, 189, 39, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px rgba(41, 35, 3, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
   display: none;
   height: 320px;
   left: 0;
@@ -431,8 +450,8 @@ a:visited {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--clr-neutral-100);
   padding: 10px;
   opacity: 0;
   /* Hide by default */
@@ -480,17 +499,17 @@ a:visited {
 }
 
 .artist-2 {
-  background-image: url(img/Carina_Soy_Img_2.jpg);
+  background-image: url(img/Cronux_Img_2.png);
   border-radius: 10px !important;
 }
 
 .artist-3 {
-  background-image: url(img/Carina_Soy_Img_3.jpg);
+  background-image: url(img/Kiri_Img_3.png);
   border-radius: 10px !important;
 }
 
 .artist-4 {
-  background-image: url(img/Carina_Soy_Img_4.jpg);
+  background-image: url(img/Riri_Img_2.png);
   border-radius: 10px !important;
 }
 /* 
@@ -510,7 +529,162 @@ a:visited {
 } */
 
 /* exhibit stuff */
-.exhibit-container {
+
+/* .exhibit-container {
+  display: grid;
+  place-items: center;
+  margin-inline: 1.5rem;
+  padding-block: 5rem;
+}*/
+
+/* .card__container{
+  display: grid;
+} */
+
+.card__article{
+  position: relative;
+}
+
+.card__img{
+  width: 328px;
+  border-radius: 1.5rem;
+}
+
+.card__data{
+  width: 280px;
+  background-color: var(--clr-accent-300);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 24px hsla(0, 0%, 0%, .15);
+  border-radius: 1rem;
+  position: absolute;
+  bottom: -9rem;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  opacity: 0;
+  transition: opacity 1s 1s;
+}
+
+.card__description{
+  display: block;
+  font-size: var(--fs-600);
+  margin-bottom: .25rem;
+}
+
+.card__title{
+  font-size: var(--fs-600);
+  font-weight: var(--fw-regular);
+  color: var(--clr-neutral-100);
+  margin-bottom: .75rem;
+}
+
+.card__button{
+  text-decoration: none;
+  font-size: var(--fs-400);
+  font-weight: var(--fw-regular);
+  color: var(--clr-neutral-500);
+}
+
+.card__button:hover{
+  text-decoration: underline;
+} 
+
+/* animations on hover */
+.card__article:hover .card__data{
+  animation: show-data 1s forwards;
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.card__article:not(:hover){
+  animation: show-overflow 2s forwards;
+}
+
+.card__article:not(:hover) >.card__data{
+  animation: remove-data 1s forwards;
+}
+
+/* Card animation */
+@keyframes show-data {
+  50% {
+    transform: translateY(-10rem);
+  }
+
+  100% {
+    transform: translateY(-7rem);
+  }
+}
+
+@keyframes remove-overflow {
+  to {
+    overflow: initial;
+  }
+}
+
+@keyframes remove-data {
+  0% {
+    transform: translateY(-7rem);
+  }
+
+  50% {
+    transform: translateY(-10rem);
+  }
+
+  100% {
+    transform: translateY(.5rem);
+  }
+}
+
+@keyframes show-overflow {
+  0% {
+    overflow: initial;
+    pointer-events: none;
+  }
+
+  50% {
+    overflow: hidden;
+  }
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+/* @media screen and (max-width: 340px) {
+  .exhibit-container {
+    margin-inline: 1rem;
+  }
+
+  .card__data {
+    width: 250px;
+    padding: 1rem;
+  }
+} */
+
+/* For medium devices */
+/* @media screen and (min-width: 768px) {
+  .card__container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.5rem;
+  }
+} */
+
+/* For large devices */
+/* @media screen and (min-width: 1120px) {
+  .card__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card__img {
+    width: 348px;
+  }
+
+  .card__data {
+    width: 316px;
+    padding-inline: 2.5rem;
+  }
+} */
+
+
+.exhibit-container{
   width: 1400px;
   margin: 10px auto;
   columns: 4;
@@ -519,13 +693,14 @@ a:visited {
 
 .exhibit-container .box {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   break-inside: avoid;
 }
 
 .exhibit-container .box img {
   max-width: 100%;
   border-radius: 15px;
+  border: 2px solid var(--clr-primary-200);
 }
 
 @media(max-width: 50em){
@@ -540,6 +715,13 @@ a:visited {
     columns: 2;
   }
 }
+
+@media(max-width: 30em) {
+  .exhibit-container {
+    columns: 1;
+  }
+}
+
 /* utility classes */
 
 .visually-hidden {
@@ -720,3 +902,4 @@ a:visited {
 .padding-block-700 {
   padding-block: var(--size-700);
 }
+
