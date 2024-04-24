@@ -732,6 +732,10 @@ a:visited {
   height: auto;
 }
 
+.container img{
+  text-align: center;
+}
+
 /* utility classes */
 
 .visually-hidden {
