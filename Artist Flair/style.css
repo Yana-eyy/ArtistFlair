@@ -722,6 +722,16 @@ a:visited {
   }
 }
 
+.about-info{
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.about-logo{
+  width: 400px;
+  height: auto;
+}
+
 /* utility classes */
 
 .visually-hidden {
